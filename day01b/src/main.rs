@@ -10,7 +10,8 @@ fn run(input: &str) -> u32 {
     input.lines().map(line_val).sum()
 }
 
-#[derive(Clone, Debug)]
+// Will order by the first element, our index. Indexes are unique among IndVals
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord)]
 struct IndVal {
     index: usize,
     val: u32,
@@ -42,14 +43,8 @@ fn line_val(line: &str) -> u32 {
             };
 
             first_word = match first_word {
-                Some(first_word) => {
-                    if curr_ind_val.index < first_word.index {
-                        Some(curr_ind_val.clone())
-                    } else {
-                        Some(first_word)
-                    }
-                }
-                None => Some(curr_ind_val.clone()),
+                Some(first_word) => Some(std::cmp::min(curr_ind_val, first_word)),
+                None => Some(curr_ind_val),
             };
         };
 
@@ -61,14 +56,8 @@ fn line_val(line: &str) -> u32 {
             };
 
             last_word = match last_word {
-                Some(last_word) => {
-                    if curr_ind_val.index > last_word.index {
-                        Some(curr_ind_val.clone())
-                    } else {
-                        Some(last_word)
-                    }
-                }
-                None => Some(curr_ind_val.clone()),
+                Some(last_word) => Some(std::cmp::max(curr_ind_val, last_word)),
+                None => Some(curr_ind_val),
             };
         }
     }
@@ -92,31 +81,17 @@ fn line_val(line: &str) -> u32 {
     });
 
     // Finally, get the highest/lowest numbers at all by comparing positions
+    // Each string must have at least one low number and one high number, so one of these will be Some
+    // Using min directly could result in "None", so we need to explicitly check our options
     let first = match (first_word, first_digit) {
         (None, None) => unreachable!(),
         (None, Some(first_digit)) => first_digit.val,
         (Some(first_word), None) => first_word.val,
-        (Some(first_word), Some(first_digit)) => {
-            if first_word.index < first_digit.index {
-                first_word.val
-            } else {
-                first_digit.val
-            }
-        }
+        (Some(first_word), Some(first_digit)) => std::cmp::min(first_word, first_digit).val,
     };
 
-    let last = match (last_word, last_digit) {
-        (None, None) => unreachable!(),
-        (None, Some(last_digit)) => last_digit.val,
-        (Some(last_word), None) => last_word.val,
-        (Some(last_word), Some(last_digit)) => {
-            if last_word.index > last_digit.index {
-                last_word.val
-            } else {
-                last_digit.val
-            }
-        }
-    };
+    // Since "Some" has a higher ordering than "None", we can just call max directly and get a Some out
+    let last = std::cmp::max(last_word, last_digit).unwrap().val;
 
     first * 10 + last
 }
