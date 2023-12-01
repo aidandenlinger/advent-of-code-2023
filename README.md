@@ -26,11 +26,8 @@ would be expected.
 Thanks to other folks publishing their Rust repos so I can compare and improve
 my code afterwards :)
 
-// - timvisee, <https://github.com/timvisee/advent-of-code-2022>
-// - fspoettel, <https://github.com/fspoettel/advent-of-code-2022>
+- fspoettel, <https://github.com/fspoettel/advent-of-code-2023>
 - AxlLind, <https://github.com/AxlLind/AdventOfCode2023>
-// - aldanor, <https://github.com/aldanor/aoc-2022>
-// - fasterthanlime, <https://fasterthanli.me/series/advent-of-code-2023>
 
 ## Contributing
 Not accepting contributions, these are puzzles :)
