@@ -96,6 +96,47 @@ fn line_val(line: &str) -> u32 {
     first * 10 + last
 }
 
+// *Much* simpler code inspired by some online solutions. I was entraced
+// by the str .find() method and only having to call it 18 times, while
+// this solution searches on *every* character 9 times. However, that's
+// pretty much what .find() has to be doing behind the hood, and this
+// has a much simpler solution by not having to combine the results from
+// find/rfind with the digit results. It basically does both at once.
+// The real ultimate solution is probably using regex and replacing smartly.
+// But overall I'm still okay with my first answer, it's not too outclassed,
+// it's just way overcomplicated
+fn _line_val_alt(line: &str) -> u32 {
+    let word_digits = HashMap::from([
+        ("one", 1),
+        ("two", 2),
+        ("three", 3),
+        ("four", 4),
+        ("five", 5),
+        ("six", 6),
+        ("seven", 7),
+        ("eight", 8),
+        ("nine", 9),
+    ]);
+
+    let mut digits = Vec::new();
+
+    for (ind, char) in line.chars().enumerate() {
+        if char.is_ascii_digit() {
+            digits.push(char.to_digit(10).unwrap());
+        } else {
+            let sub = &line[ind..];
+            for word in word_digits.keys() {
+                if sub.starts_with(word) {
+                    digits.push(word_digits[word]);
+                    break;
+                }
+            }
+        }
+    }
+
+    digits.first().unwrap() * 10 + digits.last().unwrap()
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
