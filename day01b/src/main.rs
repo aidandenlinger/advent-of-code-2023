@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-const INPUT: &str = include_str!("../input.txt");
+const INPUT: &str = include_str!("../../input/day01.txt");
 
 fn main() {
     println!("{}", run(INPUT));

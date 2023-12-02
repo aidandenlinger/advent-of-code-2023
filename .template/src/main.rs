@@ -1,7 +1,11 @@
-const INPUT: &str = include_str!("../input.txt");
+const INPUT: &str = include_str!("../../input/template.txt");
 
 fn main() {
-    println!("Hello, world!");
+    println!("{}", run(INPUT));
+}
+
+fn run(input: &str) -> i32 {
+    0
 }
 
 #[cfg(test)]
@@ -12,6 +16,6 @@ mod test {
 
     #[test]
     fn test_web() {
-        assert_eq!();
+        assert_eq!(0, run(WEB_EXAMPLE));
     }
 }
