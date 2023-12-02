@@ -3,7 +3,7 @@
 Doing Advent of Code 2023 in Rust for practice and fun :)
 
 Solutions prioritize legibility over optimality, although both are limited to
-the extent of my knowledge ;). You can find Advent of Code 2022
+the extent of my knowledge ;). You can find Advent of Code 2023
 [here](https://adventofcode.com/2023).
 
 ## Install
