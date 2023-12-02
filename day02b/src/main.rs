@@ -10,7 +10,7 @@ struct Game {
     sets: Vec<Set>,
 }
 
-#[derive(Default, Debug, PartialEq, PartialOrd, Ord, Eq)]
+#[derive(Debug, PartialEq, PartialOrd, Ord, Eq)]
 struct Set {
     blue: u32,
     green: u32,
