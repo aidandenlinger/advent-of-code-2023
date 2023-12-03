@@ -61,7 +61,7 @@ fn touching_symbol(grid: &Vec<Vec<char>>, row: usize, col: usize) -> bool {
             continue;
         }
         for c in col.saturating_sub(1)..=col + 1 {
-            if c >= grid[0].len() {
+            if c >= grid[0].len() || (r == row && c == col) {
                 continue;
             }
             neighbors.push(grid[r][c]);
