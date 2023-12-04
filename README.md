@@ -13,9 +13,10 @@ You need the rust toolchain, which you can install with
 ## Usage
 Each day has two folders - one for part a and one for part b.
 
-To run, open that day and part's folder and run `cargo run`. These
-solutions assume proper input, it will panic on improper inputs. You
-can change the input in the `input.txt` file in the problem's folder.
+To run, create a folder called `input` at the top of the repo and place your
+inputs inside, with the format `dayXX.txt`. Then, you can open that day and
+part's folder and run `cargo run`. These solutions assume proper input, it will
+panic on improper inputs.
 
 `cargo test` will run basic tests on the examples from the problem prompt, as
 well as test that it produces the expected answer from my input. If you change
