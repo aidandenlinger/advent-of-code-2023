@@ -26,12 +26,12 @@ would be expected.
 Thanks to other folks publishing their Rust repos so I can learn and improve
 my code afterwards :)
 
-- timvisee, <https://github.com/timvisee/advent-of-code-2023>
-- fspoettel, <https://github.com/fspoettel/advent-of-code-2023/tree/main/src/bin>
-- AxlLind, <https://github.com/AxlLind/AdventOfCode2023/tree/main/src/bin>
-- believer, <https://github.com/believer/advent-of-code/tree/master/rust/2023/src>
-- maneatingape, <https://github.com/maneatingape/advent-of-code-rust/tree/main/src/year2023>
-- LowLevelLearning (not always Rust, but fun), <https://youtube.com/playlist?list=PLc7W4b0WHTAWQBQkx8oGrFuiCuQFbhecq>
+- [timvisee](https://github.com/timvisee/advent-of-code-2023)
+- [fspoettel](https://github.com/fspoettel/advent-of-code-2023/tree/main/src/bin)
+- [AxlLind](https://github.com/AxlLind/AdventOfCode2023/tree/main/src/bin)
+- [believer](https://github.com/believer/advent-of-code/tree/master/rust/2023/src)
+- [maneatingape](https://github.com/maneatingape/advent-of-code-rust/tree/main/src/year2023)
+- [LowLevelLearning (Youtube, mostly not Rust but fun)](https://youtube.com/playlist?list=PLc7W4b0WHTAWQBQkx8oGrFuiCuQFbhecq)
 
 ## Contributing
 Not accepting contributions, these are puzzles :)
