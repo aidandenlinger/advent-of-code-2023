@@ -51,7 +51,6 @@ impl Card {
 
 fn run(input: &str) -> usize {
     let mut cards: Vec<Card> = input.lines().map(Card::new).collect();
-    let mut num_of_cards = cards.len();
 
     for index in 0..cards.len() {
         let card = &cards[index];
@@ -60,13 +59,12 @@ fn run(input: &str) -> usize {
 
         // For each winning number, we get a new card
         // For each copy of this card, we get 1 of that new card
-        for num in 1..=winning_numbers {
-            num_of_cards += copies;
-            cards[index + num].copies += copies;
+        for next_card in cards.iter_mut().skip(index + 1).take(winning_numbers) {
+            next_card.copies += copies;
         }
     }
 
-    num_of_cards
+    cards.into_iter().map(|c| c.copies).sum()
 }
 
 #[cfg(test)]
