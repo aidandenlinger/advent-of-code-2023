@@ -14,8 +14,7 @@ fn run(input: &str) -> usize {
     parse(input)
         .iter()
         .map(|r| r.win_options().len()) // number of winning options
-        .reduce(|acc, e| acc * e) // multiply them all together
-        .unwrap()
+        .product() // multiply them all together
 }
 
 impl Race {
