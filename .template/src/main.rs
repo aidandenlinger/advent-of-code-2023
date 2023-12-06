@@ -5,7 +5,7 @@ fn main() {
 }
 
 fn run(input: &str) -> i32 {
-    0
+    todo!()
 }
 
 #[cfg(test)]
