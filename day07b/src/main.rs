@@ -46,8 +46,7 @@ impl Hand {
                 *card_counts.entry(*card).or_default() += 1;
             }
 
-            let joker_count = *card_counts.get(&Card::Joker).unwrap_or(&0);
-            card_counts.remove(&Card::Joker);
+            let joker_count = card_counts.remove(&Card::Joker).unwrap_or(0);
 
             // card_counts holds the counts for every card *except* joker
             let mut card_counts = card_counts.iter().collect::<Vec<(&Card, &i32)>>();
