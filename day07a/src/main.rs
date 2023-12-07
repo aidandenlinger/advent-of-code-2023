@@ -49,21 +49,25 @@ impl Hand {
             let mut card_counts = card_counts.iter().collect::<Vec<(&Card, &i32)>>();
             card_counts.sort_by(|a, b| b.1.cmp(a.1));
 
-            if card_counts.len() == 1 {
+            if card_counts.len() <= 1 {
                 HandType::FiveOfAKind
             } else if card_counts.len() == 2 && *card_counts[0].1 == 4 {
                 HandType::FourOfAKind
-            } else if card_counts.len() == 2 && *card_counts[1].1 == 2 {
+            } else if card_counts.len() == 2 {
+                // if there's only two types of cards and we don't have a five
+                // of a kind or a four of a kind (checked earlier), we *must*
+                // have a full house. To have two types of cards and 5 cards
+                // total, one group must have 3 and one group must have 2.
                 HandType::FullHouse
-            } else if card_counts.len() == 3
-                && card_counts.iter().skip(1).all(|(_, &count)| count == 1)
-            {
+            } else if card_counts.len() == 3 && *card_counts[0].1 == 3 {
                 HandType::ThreeOfAKind
-            } else if card_counts.len() == 3
-                && card_counts.iter().take(2).all(|(_, &count)| count == 2)
-            {
+            } else if card_counts.len() == 3 {
+                // Same logic as full house - we have 3 card types and we don't have
+                // 3 of a kind. Therefore, two groups must have 2 cards each.
                 HandType::TwoPair
-            } else if card_counts.len() == 4 && *card_counts[0].1 == 2 {
+            } else if card_counts.len() == 4 {
+                // By definition, if we have 4 different groups of cards and 5 total
+                // cards we must have a one pair
                 HandType::OnePair
             } else if card_counts.len() == 5 {
                 HandType::HighCard
