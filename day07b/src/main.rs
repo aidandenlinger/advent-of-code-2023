@@ -53,32 +53,21 @@ impl Hand {
             let mut card_counts = card_counts.iter().collect::<Vec<(&Card, &i32)>>();
             card_counts.sort_by(|a, b| b.1.cmp(a.1));
 
-            if card_counts.len() <= 1 {
-                HandType::FiveOfAKind
-            } else if card_counts.len() == 2 && *card_counts[0].1 + joker_count == 4 {
-                HandType::FourOfAKind
-            } else if card_counts.len() == 2 {
-                // if there's only two types of cards (plus any types of potential jokers)
-                // and we don't have a five of a kind or a four of a kind (checked earlier),
-                // we *must* have a full house. To have two types of cards and 5 cards total,
-                // one group must have 3 and one group must have 2. We don't need to check *how*
-                // to distribute the jokers, they can be distributed into a full house
-                HandType::FullHouse
-            } else if card_counts.len() == 3 && *card_counts[0].1 + joker_count == 3 {
-                HandType::ThreeOfAKind
-            } else if card_counts.len() == 3 {
-                // Same logic as full house - we have 3 card types and we don't have
-                // 3 of a kind. Therefore, two groups must have 2 cards each. we can
-                // distribute jokers as needed
-                HandType::TwoPair
-            } else if card_counts.len() == 4 {
-                // By definition, if we have 4 different groups of cards and 5 total
-                // cards we must have a one pair
-                HandType::OnePair
-            } else if card_counts.len() == 5 {
-                HandType::HighCard
-            } else {
-                unreachable!("Undetermined hand type");
+            match card_counts.len() {
+                // 0 for if we have a hand of all jokers
+                0 | 1 => HandType::FiveOfAKind,
+                2 if *card_counts[0].1 + joker_count == 4 => HandType::FourOfAKind,
+                // If there's only two types of cards and we don't have a 4 of a kind
+                // (checked earlier), we *must* have a full house. pigeonhole principle
+                // We don't care *how* the jokers are distributed, just that they can be
+                2 => HandType::FullHouse,
+                3 if *card_counts[0].1 + joker_count == 3 => HandType::ThreeOfAKind,
+                // Same pigeonhole principle, if we don't have 3 of a kind we must have two pair
+                3 => HandType::TwoPair,
+                // pigeonhole principle again
+                4 => HandType::OnePair,
+                5 => HandType::HighCard,
+                _ => unreachable!("Undetermined hand type"),
             }
         };
 
