@@ -8,7 +8,7 @@ fn main() {
     println!("{}", run(INPUT));
 }
 
-fn run(input: &str) -> i64 {
+fn run(input: &str) -> usize {
     let map = parse(input);
 
     // This kinda sucks, I figured out LCM was useful in the example
@@ -44,6 +44,22 @@ fn run(input: &str) -> i64 {
                     break;
                 }
             }
+
+            // Check that lcm will actually work by verifying we loop back
+            // to a Z node in `path_len` steps. I don't think this is enough
+            // to prove lcm works, but definitely a hint that it's useful
+            for dir in map.dirs.iter().cycle().skip(path_len).take(path_len) {
+                curr = map
+                    .nodes
+                    .get_key_value(match dir {
+                        Dir::Left => curr.1 .0,
+                        Dir::Right => curr.1 .1,
+                    })
+                    .unwrap();
+            }
+
+            // We went path_len more steps, and ended up back at Z
+            assert!(curr.0.ends_with('Z'));
 
             path_len
         })
