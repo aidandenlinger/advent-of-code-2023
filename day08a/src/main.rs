@@ -9,7 +9,7 @@ fn main() {
     println!("{}", run(INPUT));
 }
 
-fn run(input: &'static str) -> i32 {
+fn run(input: &str) -> i32 {
     let map = parse(input);
 
     let mut curr = map
@@ -36,7 +36,7 @@ fn run(input: &'static str) -> i32 {
     count
 }
 
-fn parse(input: &'static str) -> Map {
+fn parse(input: &str) -> Map {
     let (dirs, elements) = input.split_once("\n\n").expect("Empty line");
 
     let dirs = dirs.chars().map(Dir::new).collect();
@@ -61,9 +61,9 @@ fn parse(input: &'static str) -> Map {
 }
 
 #[derive(Debug, PartialEq)]
-struct Map {
+struct Map<'a> {
     dirs: Vec<Dir>,
-    nodes: HashMap<&'static str, (&'static str, &'static str)>,
+    nodes: HashMap<&'a str, (&'a str, &'a str)>,
 }
 
 #[derive(Debug, PartialEq)]
