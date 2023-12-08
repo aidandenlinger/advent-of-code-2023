@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use num::integer::lcm;
+use num_integer::lcm;
 
 const INPUT: &str = include_str!("../../input/day08.txt");
 
