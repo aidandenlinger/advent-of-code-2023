@@ -11,6 +11,7 @@ fn main() {
 
 fn run(input: &'static str) -> i32 {
     let map = parse(input);
+
     let mut curr = map
         .nodes
         .get_key_value(START_NODE)
@@ -18,10 +19,13 @@ fn run(input: &'static str) -> i32 {
     let mut count = 0;
 
     for dir in map.dirs.iter().cycle() {
-        match dir {
-            Dir::Left => curr = map.nodes.get_key_value(curr.1 .0).unwrap(),
-            Dir::Right => curr = map.nodes.get_key_value(curr.1 .1).unwrap(),
-        }
+        curr = map
+            .nodes
+            .get_key_value(match dir {
+                Dir::Left => curr.1 .0,
+                Dir::Right => curr.1 .1,
+            })
+            .unwrap();
         count += 1;
 
         if *curr.0 == END_NODE {
